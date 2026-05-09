@@ -1,997 +1,356 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>面试备战手册 - 招聘实习生</title>
+<title>面试诊断报告 — 吴春波</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{cream:{DEFAULT:'#FAF7F2',dark:'#F0EBE3',deep:'#E8E0D6'},ink:{DEFAULT:'#2D2A26',sec:'#6B6560',muted:'#9C958E'},forest:{DEFAULT:'#2D6A4F',light:'#40916C',pale:'#D8F3DC',ghost:'rgba(45,106,79,0.06)'},amber:{DEFAULT:'#D4A373',light:'#FAEDCD',deep:'#BC6C25'},coral:{DEFAULT:'#BC4749',light:'#FCE4E4'}},fontFamily:{serif:['"Noto Serif SC"','Georgia','serif']}}}}
+</script>
 <style>
-  :root {
-    --coral: #E8785A;
-    --coral-light: #F09078;
-    --coral-dark: #D0624A;
-    --sage: #7BAE7F;
-    --sage-light: #9CC4A0;
-    --sage-dark: #5E9462;
-    --cream: #FAF7F2;
-    --cream-dark: #F0EBE2;
-    --gold: #D4A855;
-    --gold-light: #E0BC72;
-    --charcoal: #2D2D2D;
-    --charcoal-light: #4A4A4A;
-    --warm-gray: #8A8078;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    font-family: 'Noto Sans SC', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-  }
-
-  body {
-    min-height: 100vh;
-    background: var(--cream);
-    overflow-x: hidden;
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--cream); }
-  ::-webkit-scrollbar-thumb { background: var(--coral-light); border-radius: 3px; }
-
-  /* Hero animation */
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  @keyframes float1 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(20px, -15px) rotate(5deg); }
-    66% { transform: translate(-10px, 10px) rotate(-3deg); }
-  }
-
-  @keyframes float2 {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    33% { transform: translate(-15px, 20px) rotate(-5deg); }
-    66% { transform: translate(10px, -10px) rotate(3deg); }
-  }
-
-  @keyframes float3 {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    50% { transform: translate(10px, -20px) scale(1.05); }
-  }
-
-  @keyframes pulse-ring {
-    0% { transform: scale(0.95); opacity: 0.7; }
-    50% { transform: scale(1.05); opacity: 0.3; }
-    100% { transform: scale(0.95); opacity: 0.7; }
-  }
-
-  .hero-bg {
-    background: linear-gradient(135deg, #E8785A 0%, #F09078 25%, #D4A855 50%, #E8785A 75%, #F09078 100%);
-    background-size: 300% 300%;
-    animation: gradientShift 12s ease infinite;
-  }
-
-  .geo-shape-1 {
-    animation: float1 8s ease-in-out infinite;
-  }
-  .geo-shape-2 {
-    animation: float2 10s ease-in-out infinite;
-  }
-  .geo-shape-3 {
-    animation: float3 7s ease-in-out infinite;
-  }
-
-  /* Cards */
-  .bento-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(232, 120, 90, 0.12);
-    border-radius: 24px;
-    box-shadow:
-      0 2px 8px rgba(45, 45, 45, 0.04),
-      0 8px 24px rgba(45, 45, 45, 0.06),
-      0 16px 48px rgba(232, 120, 90, 0.04);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  .bento-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.7s ease, transform 0.7s ease,
-                box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .bento-card:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 4px 12px rgba(45, 45, 45, 0.06),
-      0 12px 32px rgba(45, 45, 45, 0.1),
-      0 24px 64px rgba(232, 120, 90, 0.08);
-  }
-
-  .bento-card.visible:hover {
-    transform: translateY(-4px);
-  }
-
-  /* Quote block */
-  .quote-block {
-    background: linear-gradient(135deg, rgba(232, 120, 90, 0.06) 0%, rgba(212, 168, 85, 0.06) 100%);
-    border-left: 4px solid var(--coral);
-    border-radius: 0 16px 16px 0;
-    padding: 20px 24px;
-    margin: 12px 0;
-    font-size: 0.95rem;
-    line-height: 1.85;
-    color: var(--charcoal-light);
-  }
-
-  .quote-block p { margin-bottom: 10px; }
-  .quote-block p:last-child { margin-bottom: 0; }
-
-  /* Timeline */
-  .timeline-connector {
-    position: absolute;
-    left: 24px;
-    top: 48px;
-    bottom: 24px;
-    width: 3px;
-    background: linear-gradient(to bottom, var(--coral), var(--gold), var(--sage));
-    border-radius: 2px;
-  }
-
-  .timeline-dot {
-    position: absolute;
-    left: 17px;
-    top: 6px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 3px solid var(--cream);
-    z-index: 1;
-  }
-
-  /* Accordion */
-  .accordion-item {
-    border: 1px solid rgba(232, 120, 90, 0.1);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: box-shadow 0.3s ease;
-  }
-  .accordion-item:hover {
-    box-shadow: 0 2px 12px rgba(232, 120, 90, 0.08);
-  }
-  .accordion-header {
-    padding: 16px 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(250, 247, 242, 0.6);
-    transition: background 0.3s ease;
-    user-select: none;
-  }
-  .accordion-header:hover {
-    background: rgba(232, 120, 90, 0.06);
-  }
-  .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                padding 0.3s ease;
-    padding: 0 20px;
-  }
-  .accordion-content.open {
-    max-height: 500px;
-    padding: 0 20px 16px 20px;
-  }
-  .accordion-arrow {
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-    margin-left: 12px;
-  }
-  .accordion-arrow.open {
-    transform: rotate(180deg);
-  }
-
-  /* Checkbox */
-  .check-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 0;
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-  }
-  .check-item:hover { opacity: 0.8; }
-  .check-item.checked .check-text {
-    text-decoration: line-through;
-    color: var(--warm-gray);
-  }
-  .check-box {
-    width: 22px;
-    height: 22px;
-    border: 2px solid var(--coral-light);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-  .check-item.checked .check-box {
-    background: var(--coral);
-    border-color: var(--coral);
-  }
-  .check-box svg {
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all 0.3s ease;
-  }
-  .check-item.checked .check-box svg {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  /* Nav */
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border-radius: 12px;
-    color: var(--charcoal-light);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-  }
-  .nav-link:hover, .nav-link.active {
-    background: rgba(232, 120, 90, 0.1);
-    color: var(--coral-dark);
-  }
-  .nav-link .nav-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--coral-light);
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-  .nav-link:hover .nav-dot, .nav-link.active .nav-dot {
-    background: var(--coral);
-    transform: scale(1.4);
-  }
-
-  /* Gradient text */
-  .gradient-text {
-    background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .gradient-text-sage {
-    background: linear-gradient(135deg, var(--sage-dark) 0%, var(--sage) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Number highlight */
-  .num-highlight {
-    font-size: 2rem;
-    font-weight: 900;
-    line-height: 1.2;
-    background: linear-gradient(135deg, var(--coral) 0%, var(--gold) 50%, var(--coral-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: gradientShift 4s ease infinite;
-  }
-
-  /* Tag */
-  .tag {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  /* Section label */
-  .section-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--coral);
-    margin-bottom: 8px;
-  }
-
-  /* Flow arrow */
-  .flow-arrow {
-    color: var(--coral);
-    font-weight: 700;
-    font-size: 1.2rem;
-    padding: 4px 0;
-  }
-
-  /* Progress bar for nav */
-  .progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--coral), var(--gold));
-    z-index: 100;
-    transition: width 0.1s linear;
-    border-radius: 0 2px 2px 0;
-  }
-
-  /* Learn/don't learn columns */
-  .learn-col {
-    padding: 16px 20px;
-    border-radius: 16px;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .bento-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .side-nav {
-      display: none !important;
-    }
-    .main-content {
-      margin-left: 0 !important;
-    }
-    .num-highlight {
-      font-size: 1.5rem;
-    }
-  }
-
-  @media (max-width: 1024px) and (min-width: 769px) {
-    .bento-grid {
-      grid-template-columns: 1fr 1fr !important;
-    }
-    .span-2 { grid-column: span 2 !important; }
-    .side-nav { display: none !important; }
-    .main-content { margin-left: 0 !important; }
-  }
+html{scroll-behavior:smooth}
+body{background:#FAF7F2;color:#2D2A26;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.8;-webkit-font-smoothing:antialiased}
+.font-serif{font-family:'Noto Serif SC',Georgia,serif}
+.diagnosis-band{background:linear-gradient(135deg,#2D2A26 0%,#3D3832 100%)}
+.star-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #F0EBE3}
+.star-row:last-child{border-bottom:none}
+.star-tag{flex-shrink:0;width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.toast-copy{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99;opacity:0;transition:opacity .3s}
+.toast-copy.show{opacity:1}
+.qa-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:768px){.qa-compare{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
+<body class="min-h-screen">
 
-<!-- Progress Bar -->
-<div class="progress-bar" id="progressBar" style="width: 0%"></div>
+<div class="h-1 bg-gradient-to-r from-forest via-amber to-forest opacity-50"></div>
 
-<!-- Side Navigation -->
-<nav class="side-nav" style="position: fixed; left: 0; top: 0; bottom: 0; width: 220px; background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-right: 1px solid rgba(232,120,90,0.08); padding: 24px 16px; z-index: 50; overflow-y: auto;">
-  <div style="margin-bottom: 32px; padding: 0 8px;">
-    <div style="font-size: 0.7rem; font-weight: 700; color: var(--coral); letter-spacing: 0.15em; margin-bottom: 6px;">INTERVIEW PREP</div>
-    <div style="font-size: 0.85rem; font-weight: 600; color: var(--charcoal);">面试备战手册</div>
-  </div>
-
-  <div style="display: flex; flex-direction: column; gap: 2px;">
-    <a href="#positioning" class="nav-link"><span class="nav-dot"></span>核心定位</a>
-    <a href="#intro-standard" class="nav-link"><span class="nav-dot"></span>自我介绍 · 标准版</a>
-    <a href="#intro-elevator" class="nav-link"><span class="nav-dot"></span>自我介绍 · 电梯版</a>
-    <a href="#no-experience" class="nav-link"><span class="nav-dot"></span>没有招聘经验</a>
-    <a href="#why-recruit" class="nav-link"><span class="nav-dot"></span>为什么想做招聘</a>
-    <a href="#killer-story" class="nav-link"><span class="nav-dot"></span>杀手锏故事</a>
-    <a href="#structure" class="nav-link"><span class="nav-dot"></span>回答结构</a>
-    <a href="#learn-from" class="nav-link"><span class="nav-dot"></span>对标学习</a>
-    <a href="#questions" class="nav-link"><span class="nav-dot"></span>反问环节</a>
-    <a href="#mindset" class="nav-link"><span class="nav-dot"></span>心态校准</a>
-    <a href="#followups" class="nav-link"><span class="nav-dot"></span>追问应对</a>
-    <a href="#numbers" class="nav-link"><span class="nav-dot"></span>数字武器库</a>
-    <a href="#checklist" class="nav-link"><span class="nav-dot"></span>面试前检查</a>
+<!-- ===== STICKY NAV ===== -->
+<nav class="sticky top-0 z-50 bg-cream/80 backdrop-blur-md border-b border-cream-deep/60">
+  <div class="max-w-6xl mx-auto px-8 py-2.5 flex items-center gap-1 text-sm overflow-x-auto">
+    <span class="font-serif font-semibold text-ink shrink-0 mr-4">面试诊断报告</span>
+    <a href="#diagnosis" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">诊断</a>
+    <a href="#patterns" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">根因</a>
+    <a href="#radar" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">能力</a>
+    <a href="#m01" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">表达</a>
+    <a href="#m02" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">认知</a>
+    <a href="#m03" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">实战</a>
+    <a href="#redirect" class="px-3 py-1 rounded-md text-ink-muted hover:text-forest hover:bg-forest-ghost transition shrink-0">方向</a>
   </div>
 </nav>
 
-<!-- Main Content -->
-<div class="main-content" style="margin-left: 220px; padding: 0 32px 64px; max-width: 1200px; margin-right: auto;">
+<!-- ===== HEADER ===== -->
+<header class="max-w-6xl mx-auto px-8 pt-14 pb-8">
+  <p class="text-ink-muted text-sm tracking-wider mb-2">面试诊断与高阶升级报告</p>
+  <div class="flex items-baseline gap-4 flex-wrap">
+    <h1 class="font-serif text-2xl md:text-3xl text-ink">吴春波</h1>
+    <span class="text-ink-muted text-sm">广外 · 应用心理 / 人资硕士</span>
+    <span class="text-ink-muted text-sm">2024-05-10</span>
+  </div>
+  <div class="flex flex-wrap gap-2 mt-4">
+    <span class="badge badge-sm border-0 bg-forest-pale text-forest font-medium">#面试复盘</span>
+    <span class="badge badge-sm border-0 bg-amber-light text-amber-deep font-medium">#STAR法则</span>
+    <span class="badge badge-sm border-0 bg-cream-dark text-ink-sec font-medium">#能力诊断</span>
+    <span class="badge badge-sm border-0 bg-cream-dark text-ink-sec font-medium">#职业规划</span>
+  </div>
+</header>
 
-  <!-- Hero Section -->
-  <header class="hero-bg" id="hero" style="border-radius: 0 0 32px 32px; padding: 64px 48px; margin: 0 -32px 40px; position: relative; overflow: hidden;">
-    <!-- Decorative geometric shapes -->
-    <div class="geo-shape-1" style="position: absolute; top: 20px; right: 60px; width: 120px; height: 120px; border: 3px solid rgba(255,255,255,0.2); border-radius: 50%;"></div>
-    <div class="geo-shape-2" style="position: absolute; bottom: 30px; right: 180px; width: 80px; height: 80px; border: 3px solid rgba(255,255,255,0.15); border-radius: 16px; transform: rotate(30deg);"></div>
-    <div class="geo-shape-3" style="position: absolute; top: 50px; right: 280px; width: 40px; height: 40px; background: rgba(255,255,255,0.12); border-radius: 50%;"></div>
-    <div class="geo-shape-1" style="position: absolute; bottom: 20px; left: 60px; width: 60px; height: 60px; border: 2px solid rgba(255,255,255,0.18); border-radius: 12px; animation-delay: -3s;"></div>
-    <div class="geo-shape-2" style="position: absolute; top: 40px; left: 200px; width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 50%; animation-delay: -5s;"></div>
+<!-- ===== CORE DIAGNOSIS ===== -->
+<section id="diagnosis" class="diagnosis-band text-white py-20 px-8 mb-16 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image:url('data:image/svg+xml,<svg width=&quot;60&quot; height=&quot;60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;><circle cx=&quot;30&quot; cy=&quot;30&quot; r=&quot;1.5&quot; fill=&quot;white&quot;/></svg>')"></div>
+  <div class="max-w-6xl mx-auto relative">
+    <p class="text-amber font-serif text-xs tracking-[.25em] mb-6 uppercase">核心诊断结论</p>
+    <blockquote class="text-2xl md:text-[32px] font-serif font-bold leading-[1.4] max-w-3xl mb-8" style="line-height:1.45">
+      你不是能力不行，而是用<span class="text-amber">「架构师」</span>的思维，<br class="hidden md:inline">去应聘了一个<span class="text-amber">「消防员」</span>的岗位。
+    </blockquote>
+    <p class="text-white/50 leading-relaxed max-w-2xl text-[15px]">
+      你展现出的是缜密的系统化思维、对人才测评的深度洞察——乙方咨询顾问特质；而该校招岗位急需的是处理突发状况、对业务部门做预期管理的强执行力——甲方业务特质。<br><span class="text-amber/70">这是一次经典的"人岗不匹配"，而不是你的失败。</span>
+    </p>
+  </div>
+</section>
 
-    <!-- Decorative dots pattern -->
-    <svg style="position: absolute; bottom: 20px; right: 40px; opacity: 0.15;" width="120" height="120" viewBox="0 0 120 120">
-      <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-        <circle cx="10" cy="10" r="3" fill="white"/>
-      </pattern>
-      <rect width="120" height="120" fill="url(#dots)"/>
-    </svg>
+<!-- ===== DEEPER PATTERNS ===== -->
+<section id="patterns" class="max-w-6xl mx-auto px-8 mb-20">
+  <h2 class="font-serif text-xl text-ink mb-1">两个更深层的问题</h2>
+  <p class="text-ink-muted text-sm mb-8">表面是"表达不好"和"不够灵活"，根源其实在这里。</p>
 
-    <div style="position: relative; z-index: 1;">
-      <div class="tag" style="background: rgba(255,255,255,0.25); color: white; margin-bottom: 20px;">招聘实习生 · 备战手册</div>
-      <h1 style="font-size: 3rem; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 16px; text-shadow: 0 2px 12px rgba(0,0,0,0.1);">
-        面试备战手册
-      </h1>
-      <p style="font-size: 1.15rem; color: rgba(255,255,255,0.9); line-height: 1.7; max-width: 640px; font-weight: 400;">
-        核心策略：把<span style="font-weight: 700; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; margin: 0 2px;">岗位分析</span>、<span style="font-weight: 700; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; margin: 0 2px;">人才评估</span>、<span style="font-weight: 700; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 6px; margin: 0 2px;">沟通跟进</span>讲成招聘底层能力
-      </p>
-      <div style="margin-top: 28px; display: flex; gap: 16px; flex-wrap: wrap;">
-        <div style="background: rgba(255,255,255,0.18); padding: 8px 16px; border-radius: 12px; color: white; font-size: 0.85rem; font-weight: 500;">吴春波 · 广外硕士 · 27届</div>
-        <div style="background: rgba(255,255,255,0.18); padding: 8px 16px; border-radius: 12px; color: white; font-size: 0.85rem; font-weight: 500;">应用心理学 · 人力资源方向</div>
+  <div class="grid md:grid-cols-2 gap-6 mb-8">
+    <div class="card bg-white shadow-sm border border-cream-deep">
+      <div class="card-body p-6">
+        <span class="badge badge-sm border-0 bg-coral-light text-coral font-medium mb-3">根因一</span>
+        <h3 class="font-serif text-lg font-semibold text-ink mb-3">你容易进入"证明模式"</h3>
+        <p class="text-ink-sec text-sm leading-relaxed mb-3">潜意识里在做的是"把我脑子里的东西都展示出来"，而不是"高效解决对方的问题"。一旦进入证明模式，就容易<span class="font-semibold text-coral">用力过猛</span>。</p>
+        <div class="divider my-0"></div>
+        <p class="text-ink-muted text-sm italic mt-2">"总想通过努力、输入、做很多事来证明自己成长"——这个惯性在面试里也出现了。</p>
       </div>
     </div>
-  </header>
-
-  <!-- Bento Grid -->
-  <div class="bento-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
-
-    <!-- ==================== CARD 1: 核心定位 ==================== -->
-    <section class="bento-card" id="positioning" style="grid-column: span 2; padding: 32px;">
-      <div class="section-label">DIFFERENTIATION</div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--charcoal);">
-        你的差异化定位
-      </h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-        <div style="background: linear-gradient(135deg, rgba(232,120,90,0.08), rgba(232,120,90,0.03)); padding: 18px 20px; border-radius: 16px;">
-          <div style="font-weight: 700; color: var(--coral-dark); margin-bottom: 6px; font-size: 0.9rem;">拼"理解业务"的深度</div>
-          <div style="color: var(--charcoal-light); font-size: 0.85rem; line-height: 1.65;">20+次管理者访谈，真的和业务方聊过"你要什么样的人"</div>
-        </div>
-        <div style="background: linear-gradient(135deg, rgba(123,174,127,0.1), rgba(123,174,127,0.03)); padding: 18px 20px; border-radius: 16px;">
-          <div style="font-weight: 700; color: var(--sage-dark); margin-bottom: 6px; font-size: 0.9rem;">拼"人才判断"的科学性</div>
-          <div style="color: var(--charcoal-light); font-size: 0.85rem; line-height: 1.65;">心理学背景+5000+测评数据分析，不是纯靠直觉</div>
-        </div>
-        <div style="background: linear-gradient(135deg, rgba(212,168,85,0.1), rgba(212,168,85,0.03)); padding: 18px 20px; border-radius: 16px;">
-          <div style="font-weight: 700; color: #B8922E; margin-bottom: 6px; font-size: 0.9rem;">拼"项目规模"</div>
-          <div style="color: var(--charcoal-light); font-size: 0.85rem; line-height: 1.65;">130份JD、80+次沟通，量级碾压大多数实习生</div>
-        </div>
-        <div style="background: rgba(45,45,45,0.03); padding: 18px 20px; border-radius: 16px;">
-          <div style="font-weight: 700; color: var(--warm-gray); margin-bottom: 6px; font-size: 0.9rem;">不拼"招聘流程熟悉度"</div>
-          <div style="color: var(--charcoal-light); font-size: 0.85rem; line-height: 1.65;">承认短板，用底层能力补</div>
-        </div>
+    <div class="card bg-white shadow-sm border border-cream-deep">
+      <div class="card-body p-6">
+        <span class="badge badge-sm border-0 bg-amber-light text-amber-deep font-medium mb-3">根因二</span>
+        <h3 class="font-serif text-lg font-semibold text-ink mb-3">理解有余，决断不足</h3>
+        <p class="text-ink-sec text-sm leading-relaxed">非常擅长"理解"，但没完全建立<span class="font-semibold text-amber-deep">"决断感"</span>。能分析清楚问题，但给不出让面试官信服的"所以呢"。</p>
       </div>
-      <div style="margin-top: 16px; background: rgba(45,45,45,0.03); padding: 14px 20px; border-radius: 16px; text-align: center;">
-        <span style="font-weight: 600; color: var(--warm-gray); font-size: 0.85rem;">不拼"校园活动丰富度" —— 你有的是研究项目经验，走自己的路</span>
+    </div>
+  </div>
+
+  <div class="bg-forest-pale/20 rounded-xl p-6">
+    <p class="text-sm font-semibold text-ink mb-4">三个对应的修复方向：</p>
+    <div class="flex flex-wrap gap-3">
+      <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-2.5 border border-cream-deep shadow-sm">
+        <span class="badge badge-primary badge-sm border-0 font-bold">1</span>
+        <span class="text-sm font-medium">先结论，后解释</span>
       </div>
-    </section>
-
-    <!-- ==================== CARD 12: 数字武器库 (small, top right) ==================== -->
-    <section class="bento-card" id="numbers" style="padding: 28px;">
-      <div class="section-label">KEY NUMBERS</div>
-      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">数字武器库</h2>
-      <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">130份</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">JD撰写</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">20+</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">管理者访谈</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">80+</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">一对一深度沟通</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">5000+</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">测评数据分析</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">500份</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">员工问卷数据</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">3000+</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">小红书触达</span>
-        </div>
-        <div style="display: flex; align-items: baseline; justify-content: space-between;">
-          <span class="num-highlight">240+</span>
-          <span style="font-size: 0.8rem; color: var(--warm-gray); font-weight: 500;">高意向沉淀</span>
-        </div>
+      <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-2.5 border border-cream-deep shadow-sm">
+        <span class="badge badge-primary badge-sm border-0 font-bold">2</span>
+        <span class="text-sm font-medium">把"证明自己"改成"解决问题"</span>
       </div>
-    </section>
-
-    <!-- ==================== CARD 2: 自我介绍 标准版 ==================== -->
-    <section class="bento-card" id="intro-standard" style="grid-column: span 2; padding: 32px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-        <div class="section-label" style="margin-bottom: 0;">SELF INTRO</div>
-        <div class="tag" style="background: rgba(232,120,90,0.1); color: var(--coral-dark);">2分钟版</div>
+      <div class="flex items-center gap-2 bg-white rounded-lg px-4 py-2.5 border border-cream-deep shadow-sm">
+        <span class="badge badge-primary badge-sm border-0 font-bold">3</span>
+        <span class="text-sm font-medium">增加"现实感"</span>
       </div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;">自我介绍 | 标准版</h2>
-      <div class="quote-block">
-        <p>各位面试官好，我是吴春波，广外应用心理学硕士，人资方向，27届。</p>
-        <p><strong style="color: var(--coral-dark);">【结论】</strong>我虽然没有正式招聘实习经历，但过去一年多的研究项目和实践经历，一直在做招聘的前端工作——理解业务需求、拆解岗位职责、建立人才标准。</p>
-        <p><strong style="color: var(--coral-dark);">【证据一】</strong>第一，我独立撰写过130份岗位说明书。每份都是从管理者访谈开始，理解业务痛点和对人的真实需求，再拆解成岗位职责和人才画像。总共20多次管理者访谈，每次都在练习"如何快速理解一个岗位"。</p>
-        <p><strong style="color: var(--coral-dark);">【证据二】</strong>第二，我有大量人才沟通和判断经验。分析了5000多份测评数据，做过80多次一对一深度沟通，需要快速判断对方意向和能力匹配度并持续跟进。小红书账号触达3000+目标用户，沉淀240+高意向，这个"触达到转化"的链路和招聘漏斗逻辑高度相似。</p>
-        <p><strong style="color: var(--coral-dark);">【落回岗位】</strong>所以我不算零基础。理解业务需求、拆解岗位、判断匹配度这些能力已经有了，缺的是在真实招聘场景中串联起来的机会。相信上手很快。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RADAR ===== -->
+<section id="radar" class="max-w-6xl mx-auto px-8 mb-20">
+  <h2 class="font-serif text-xl text-ink mb-1">能力雷达图</h2>
+  <p class="text-ink-muted text-sm mb-10">能力不是"弱"，而是分布不均。</p>
+  <div class="grid grid-cols-12 gap-10 items-start">
+    <div class="col-span-12 md:col-span-7"><svg id="radar-chart" viewBox="0 0 400 360" class="w-full max-w-lg"></svg></div>
+    <div class="col-span-12 md:col-span-5 space-y-3">
+      <p class="text-forest text-xs font-semibold tracking-wider mb-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-forest"></span>优势区</p>
+      <div class="space-y-3">
+        <div><div class="flex justify-between items-center text-sm mb-1"><span class="font-medium">情绪稳定与高配合度</span><span class="badge badge-sm border-0 bg-forest text-white font-bold">95</span></div><progress class="progress progress-success w-full h-2" value="95" max="100"></progress></div>
+        <div><div class="flex justify-between items-center text-sm mb-1"><span class="font-medium">数据与业务洞察力</span><span class="badge badge-sm border-0 bg-forest-light text-white font-bold">85</span></div><progress class="progress progress-success w-full h-2" value="85" max="100"></progress></div>
+        <div><div class="flex justify-between items-center text-sm mb-1"><span class="font-medium">知识体系构建能力</span><span class="badge badge-sm border-0 bg-forest-light text-white font-bold">85</span></div><progress class="progress progress-success w-full h-2" value="85" max="100"></progress></div>
       </div>
-    </section>
-
-    <!-- ==================== CARD 7: 回答结构 (small) ==================== -->
-    <section class="bento-card" id="structure" style="padding: 28px;">
-      <div class="section-label">FRAMEWORK</div>
-      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">回答结构公式</h2>
-      <div style="display: flex; flex-direction: column; gap: 0; align-items: center;">
-        <div style="background: linear-gradient(135deg, var(--coral), var(--coral-light)); color: white; padding: 14px 20px; border-radius: 16px; text-align: center; width: 100%;">
-          <div style="font-weight: 800; font-size: 1rem;">结论先行</div>
-          <div style="font-size: 0.75rem; opacity: 0.85; margin-top: 4px;">1句话 · 30秒</div>
-        </div>
-        <div class="flow-arrow">&#8595;</div>
-        <div style="background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: white; padding: 14px 20px; border-radius: 16px; text-align: center; width: 100%;">
-          <div style="font-weight: 800; font-size: 1rem;">两个证据</div>
-          <div style="font-size: 0.75rem; opacity: 0.85; margin-top: 4px;">数字+动作+结果</div>
-        </div>
-        <div class="flow-arrow">&#8595;</div>
-        <div style="background: linear-gradient(135deg, var(--sage), var(--sage-light)); color: white; padding: 14px 20px; border-radius: 16px; text-align: center; width: 100%;">
-          <div style="font-weight: 800; font-size: 1rem;">落回岗位</div>
-          <div style="font-size: 0.75rem; opacity: 0.85; margin-top: 4px;">1-2句话 · 20秒</div>
-        </div>
+      <div class="divider my-1"></div>
+      <p class="text-coral text-xs font-semibold tracking-wider mb-2 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-coral"></span>盲区</p>
+      <div class="space-y-3">
+        <div><div class="flex justify-between items-center text-sm mb-1"><span class="font-medium">沟通"信噪比"</span><span class="badge badge-sm border-0 bg-coral text-white font-bold">60</span></div><progress class="progress progress-error w-full h-2" value="60" max="100"></progress></div>
+        <div><div class="flex justify-between items-center text-sm mb-1"><span class="font-medium">实战招聘"灰度思维"</span><span class="badge badge-sm border-0 bg-coral text-white font-bold">60</span></div><progress class="progress progress-error w-full h-2" value="60" max="100"></progress></div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- ==================== CARD 3: 电梯版 ==================== -->
-    <section class="bento-card" id="intro-elevator" style="padding: 32px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-        <div class="section-label" style="margin-bottom: 0;">SELF INTRO</div>
-        <div class="tag" style="background: rgba(123,174,127,0.15); color: var(--sage-dark);">60秒版</div>
+<!-- ===== STEPS ===== -->
+<div class="max-w-6xl mx-auto px-8 mb-4">
+  <ul class="steps steps-horizontal w-full text-sm"><li class="step step-success font-medium">表达体系重构</li><li class="step step-success font-medium">认知升级</li><li class="step font-medium">面试实战复盘</li></ul>
+</div>
+<div class="max-w-6xl mx-auto px-8 mb-6"><div class="h-px bg-cream-deep"></div></div>
+
+<!-- ===== MODULE 01: EXPRESSION ===== -->
+<section id="m01" class="max-w-6xl mx-auto px-8 pb-20">
+  <div class="flex items-end gap-5 mb-10">
+    <span class="text-6xl font-serif text-cream-deep leading-none select-none">01</span>
+    <div><h2 class="font-serif text-xl text-ink">表达体系重构</h2><p class="text-ink-muted text-sm">四个实操工具 + STAR 实战示范</p></div>
+  </div>
+  <div class="grid md:grid-cols-2 gap-5 mb-12">
+    <div class="card bg-white shadow-sm border border-cream-deep hover:border-forest/30 transition-all"><div class="card-body p-5">
+      <div class="flex items-center gap-3 mb-1"><span class="badge badge-primary badge-sm font-bold border-0">01</span><h3 class="font-semibold text-ink">倒叙法（结论先行）</h3></div>
+      <p class="text-ink-sec text-sm">先说结果，再说过程。面试官最先想知道的是"你做出了什么"。</p>
+      <div class="collapse collapse-arrow mt-2"><input type="checkbox"><div class="collapse-title text-sm text-forest font-medium py-1 min-h-0">展开示例</div><div class="collapse-content text-sm text-ink-sec pt-0"><p class="pb-2">被问到"南方电网项目"时，第一句话："我交付了一个高仿真 AI 面试智能体，大幅提升了 HR 培训转化率。"然后再展开。</p></div></div>
+    </div></div>
+    <div class="card bg-white shadow-sm border border-cream-deep hover:border-forest/30 transition-all"><div class="card-body p-5">
+      <div class="flex items-center gap-3 mb-1"><span class="badge badge-primary badge-sm font-bold border-0">02</span><h3 class="font-semibold text-ink">S + T 两句话限额</h3></div>
+      <p class="text-ink-sec text-sm">背景和任务铺垫不超过两句话，把 <span class="badge badge-xs border-0 bg-amber-light text-amber-deep font-bold">70%</span> 的时间留给 A。</p>
+      <div class="collapse collapse-arrow mt-2"><input type="checkbox"><div class="collapse-title text-sm text-forest font-medium py-1 min-h-0">展开示例</div><div class="collapse-content text-sm text-ink-sec pt-0"><p class="pb-2">S："南方电网需要提升面试官识人能力，传统讲授效果差。"T："我的任务是开发情景化培训工具。"两句话搞定，剩下全给 A 和 R。</p></div></div>
+    </div></div>
+    <div class="card bg-white shadow-sm border border-cream-deep hover:border-forest/30 transition-all"><div class="card-body p-5">
+      <div class="flex items-center gap-3 mb-1"><span class="badge badge-primary badge-sm font-bold border-0">03</span><h3 class="font-semibold text-ink">留白与钓鱼</h3></div>
+      <p class="text-ink-sec text-sm">故意漏掉细节当"饵"。面试最高境界是<span class="font-semibold text-forest">双人抛接球</span>。</p>
+      <div class="collapse collapse-arrow mt-2"><input type="checkbox"><div class="collapse-title text-sm text-forest font-medium py-1 min-h-0">展开示例</div><div class="collapse-content text-sm text-ink-sec pt-0"><p class="pb-2">"我在白云山制药梳理了上百份岗位说明书，练就了极强的业务拆解能力。"——说到这里闭嘴微笑，等面试官追问。</p></div></div>
+    </div></div>
+    <div class="card bg-white shadow-sm border border-cream-deep hover:border-forest/30 transition-all"><div class="card-body p-5">
+      <div class="flex items-center gap-3 mb-1"><span class="badge badge-primary badge-sm font-bold border-0">04</span><h3 class="font-semibold text-ink">视觉锚点</h3></div>
+      <p class="text-ink-sec text-sm mb-2">在笔记本上用最粗的记号笔写三个字：</p>
+      <div class="flex gap-2"><kbd class="kbd kbd-sm bg-forest-pale text-forest border-forest/20 font-bold">说结果！</kbd><kbd class="kbd kbd-sm bg-forest-pale text-forest border-forest/20 font-bold">1, 2, 3</kbd></div>
+    </div></div>
+  </div>
+
+  <!-- STAR -->
+  <div class="bg-white rounded-xl border border-cream-deep p-6 md:p-8 shadow-sm">
+    <div class="flex items-start justify-between mb-6">
+      <div><p class="text-xs text-ink-muted tracking-wider mb-1">STAR 实战示范</p><h3 class="font-serif text-lg text-ink">南方电网 AI 智能体项目</h3></div>
+      <button class="btn btn-sm btn-ghost text-forest gap-1 hover:bg-forest-pale" onclick="copyText('star-content')"><svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>复制</button>
+    </div>
+    <div id="star-content">
+      <div class="star-row"><span class="star-tag bg-forest-pale text-forest">S</span><div><p class="text-xs text-ink-muted mb-0.5">背景 / Situation</p><p class="text-sm text-ink-sec">南方电网校招需要快速提升内部新老 HR 的面试鉴别人才能力。</p></div></div>
+      <div class="star-row"><span class="star-tag bg-forest-pale text-forest">T</span><div><p class="text-xs text-ink-muted mb-0.5">任务 / Task</p><p class="text-sm text-ink-sec">开发一个比传统讲授更有效、仿真度更高的面试培训工具。</p></div></div>
+      <div class="star-row"><span class="star-tag bg-amber-light text-amber-deep">A</span><div><p class="text-xs text-ink-muted mb-0.5">行动 / Action</p><p class="text-sm text-ink-sec">第一，提取真实岗位和真实简历特征；第二，利用大语言模型将特征注入 AI，设定内向/外向等性格参数，生成高仿真"候选人智能体"。</p></div></div>
+      <div class="star-row"><span class="star-tag bg-forest-pale text-forest">R</span><div><p class="text-xs text-ink-muted mb-0.5">结果 / Result</p><p class="text-sm text-ink-sec">系统落地，HR 在情景模拟中真实操练提问和甄别技巧，大幅提高培训转化率。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MODULE 02: COGNITIVE UPGRADE ===== -->
+<section id="m02" class="max-w-6xl mx-auto px-8 pb-20">
+  <div class="flex items-end gap-5 mb-10">
+    <span class="text-6xl font-serif text-cream-deep leading-none select-none">02</span>
+    <div><h2 class="font-serif text-xl text-ink">认知升级</h2><p class="text-ink-muted text-sm">从"完美匹配"走向"预期管理与业务调和"</p></div>
+  </div>
+
+  <!-- Philosophy Shift -->
+  <div class="grid md:grid-cols-2 rounded-xl overflow-hidden mb-10 border border-cream-deep">
+    <div class="bg-cream-dark p-6 md:p-8 text-center flex flex-col justify-center"><p class="text-ink-muted line-through text-lg font-serif mb-2">"完美匹配"</p><p class="text-ink-muted text-sm">拿着尺子找 100 分的人</p></div>
+    <div class="bg-forest p-6 md:p-8 text-center flex flex-col justify-center"><p class="text-white text-lg font-serif font-semibold mb-2">"预期管理与业务调和"</p><p class="text-white/70 text-sm">在有限资源下，帮业务找到当前阶段最合适的人</p></div>
+  </div>
+
+  <!-- 岗位说明书 vs 人才画像 -->
+  <div class="bg-white rounded-xl border border-cream-deep p-6 md:p-8 shadow-sm mb-10">
+    <p class="text-xs text-ink-muted tracking-wider mb-1">知识卡</p>
+    <h3 class="font-semibold text-ink mb-4">岗位说明书 vs 人才画像</h3>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div class="rounded-lg p-4 bg-cream-dark/50">
+        <p class="font-semibold text-sm mb-1">岗位说明书 <span class="text-ink-muted font-normal text-xs">偏"岗位定义"</span></p>
+        <p class="text-sm text-ink-sec">对岗位本身的系统描述——职责、任职资格、汇报关系等，偏组织管理视角。<span class="font-medium">更完整。</span></p>
       </div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;">自我介绍 | 电梯版</h2>
-      <div class="quote-block">
-        <p>各位面试官好，我是吴春波，广外应用心理学硕士，人资方向。</p>
-        <p>我过去一年多的核心工作就是"理解岗位需求"和"判断人才匹配"——恰好是招聘最核心的底层能力。</p>
-        <p>独立完成130份岗位说明书，背后是20多次中高层访谈，很擅长快速拆解岗位需要什么样的人。分析过5000多份测评数据，做过80多次一对一深度沟通，也有小红书用户转化经验。</p>
-        <p>没有正式招聘经历，但招聘前端的事已经做了很多，现在需要在真实场景中串起来。</p>
+      <div class="rounded-lg p-4 bg-cream-dark/50">
+        <p class="font-semibold text-sm mb-1">人才画像 <span class="text-ink-muted font-normal text-xs">偏"招聘筛选"</span></p>
+        <p class="text-sm text-ink-sec">基于岗位需求提炼当前阶段最关键的人才特征，帮助判断匹配度。<span class="font-medium">更聚焦。</span></p>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ==================== CARD 9: 反问环节 (small) ==================== -->
-    <section class="bento-card" id="questions" style="padding: 28px;">
-      <div class="section-label">COUNTER QUESTIONS</div>
-      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">反问环节准备</h2>
-      <div style="display: flex; flex-direction: column; gap: 14px;">
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: linear-gradient(135deg, var(--coral), var(--coral-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-weight: 700; font-size: 0.75rem;">1</div>
-          <p style="font-size: 0.88rem; line-height: 1.65; color: var(--charcoal-light);">"您觉得在这个岗位上，实习生最需要具备的能力是什么？"</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-weight: 700; font-size: 0.75rem;">2</div>
-          <p style="font-size: 0.88rem; line-height: 1.65; color: var(--charcoal-light);">"这个岗位最有挑战的部分是什么？"</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 28px; height: 28px; background: linear-gradient(135deg, var(--sage), var(--sage-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: white; font-weight: 700; font-size: 0.75rem;">3</div>
-          <p style="font-size: 0.88rem; line-height: 1.65; color: var(--charcoal-light);">"如果能拿到这个机会，您对我的第一个月有什么期望？"</p>
-        </div>
+  <!-- Interviewer Quote -->
+  <div class="mb-10 max-w-lg">
+    <p class="text-xs text-ink-muted mb-2">面试官原话</p>
+    <div class="chat chat-start">
+      <div class="chat-image avatar placeholder"><div class="bg-amber/20 text-amber-deep w-10 rounded-full"><span class="text-sm font-serif">面</span></div></div>
+      <div class="chat-bubble bg-amber-light text-ink border-0 text-[15px] leading-relaxed">"没有招不到的人，只有<span class="font-bold text-amber-deep">提供给不同候选人的解决方案</span>。"</div>
+    </div>
+  </div>
+
+  <!-- Core Statement -->
+  <div class="bg-white rounded-xl border border-cream-deep p-6 md:p-8 shadow-sm relative">
+    <div class="flex items-center justify-between mb-3">
+      <p class="text-xs text-ink-muted tracking-wider">核心理念话术</p>
+      <button class="btn btn-xs btn-ghost text-forest gap-1 hover:bg-forest-pale" onclick="copyText('core-statement')"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>复制</button>
+    </div>
+    <p id="core-statement" class="text-ink-sec leading-relaxed text-sm">"我认为招聘不仅是寻找'完美画像'，更是做预期管理。当业务部门提出不切实际的要求时，我会拿着真实的候选人市场数据去沟通——建议降维、找平替、看重潜力而非当下技能——在理想与现实之间找到最优解。"</p>
+  </div>
+</section>
+
+<!-- ===== MODULE 03: INTERVIEW Q&A ===== -->
+<section id="m03" class="max-w-6xl mx-auto px-8 pb-20">
+  <div class="flex items-end gap-5 mb-10">
+    <span class="text-6xl font-serif text-cream-deep leading-none select-none">03</span>
+    <div><h2 class="font-serif text-xl text-ink">面试实战复盘</h2><p class="text-ink-muted text-sm">三个关键问题：你的回答 vs 更好的回答</p></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="mb-10">
+    <div class="chat chat-start mb-4"><div class="chat-image avatar placeholder"><div class="bg-amber/20 text-amber-deep w-10 rounded-full"><span class="text-sm font-serif">面</span></div></div><div class="chat-bubble bg-amber-light text-ink border-0">"你怎么看招聘岗位？"</div></div>
+    <div class="qa-compare ml-14">
+      <div class="rounded-xl p-5 bg-coral-light/30 border border-coral/10">
+        <p class="text-xs text-coral font-semibold mb-2">你的回答 · 学生视角</p>
+        <p class="text-sm text-ink-sec">人岗匹配、兴趣、沟通。</p>
+        <p class="text-xs text-coral mt-2 font-medium">缺了"业务感"</p>
       </div>
-    </section>
-
-    <!-- ==================== CARD 4: 没有招聘经验 ==================== -->
-    <section class="bento-card" id="no-experience" style="grid-column: span 2; padding: 32px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-        <div class="section-label" style="margin-bottom: 0;">TOUGH QUESTION</div>
-        <div class="tag" style="background: rgba(232,120,90,0.1); color: var(--coral-dark);">高频追问</div>
+      <div class="rounded-xl p-5 bg-forest-pale/40 border border-forest/10">
+        <p class="text-xs text-forest font-semibold mb-2">更好的答法 · 从业者视角</p>
+        <p class="text-sm text-ink-sec leading-relaxed">"招聘是连接业务和人才的岗位。表面上在招人，<span class="font-semibold text-ink">本质上在帮助业务解决阶段性的组织问题</span>。我比较享受快速学习岗位、拆解需求、再找到合适候选人的过程。"</p>
       </div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;">被问"没有招聘经验"怎么答</h2>
-      <div class="quote-block">
-        <p><strong style="color: var(--coral-dark);">【结论】</strong>能胜任。因为招聘最核心的两个环节——"理解岗位需求"和"判断人才匹配"——我已经有扎实基础。</p>
-        <p><strong style="color: var(--coral-dark);">【证据一】</strong>招聘第一步是理解业务要什么样的人。我写过130份岗位说明书，每一份都从管理者访谈开始，聊业务目标、聊痛点、聊对人的期望，再拆解成人才画像。20多次管理者访谈让我能比较快抓住岗位核心需求。</p>
-        <p><strong style="color: var(--coral-dark);">【证据二】</strong>招聘第二步是判断人合不合适。我分析过5000多份测评数据，做过80多次一对一深度沟通，需要快速判断意向和能力水平，再决定怎么跟进。这个判断逻辑和简历筛选、面试评估是通的。</p>
-        <p><strong style="color: var(--coral-dark);">【落回岗位】</strong>完整招聘流程还包括渠道运营、面试安排、Offer谈判等，这些我没实操过，但学习能力没问题——本科自学SPSS，研究生独立开发过面试官培训工具。需要学的会很快补上，已有的底层能力可以直接用起来。</p>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="mb-10">
+    <div class="chat chat-start mb-4"><div class="chat-image avatar placeholder"><div class="bg-amber/20 text-amber-deep w-10 rounded-full"><span class="text-sm font-serif">面</span></div></div><div class="chat-bubble bg-amber-light text-ink border-0">"招聘最大的挑战是什么？"</div></div>
+    <div class="qa-compare ml-14">
+      <div class="rounded-xl p-5 bg-coral-light/30 border border-coral/10">
+        <p class="text-xs text-coral font-semibold mb-2">你的回答 · 学生视角</p>
+        <p class="text-sm text-ink-sec">快速理解岗位。</p>
+        <p class="text-xs text-coral mt-2 font-medium">面试官想听的是"博弈感"</p>
       </div>
-    </section>
-
-    <!-- ==================== CARD 13: 检查清单 (small) ==================== -->
-    <section class="bento-card" id="checklist" style="padding: 28px;">
-      <div class="section-label">PRE-INTERVIEW</div>
-      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 16px;">面试前最后检查</h2>
-      <div id="checklistItems" style="display: flex; flex-direction: column;">
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">自我介绍背到不用想就能说</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">"没有招聘经验"回答练3遍以上</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">"为什么做招聘"回答练3遍以上</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">类招聘闭环故事讲给朋友听一遍</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">准备2-3个问面试官的问题</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">数字全部记住</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">查目标公司招聘业务情况</span>
-        </div>
-        <div class="check-item" onclick="toggleCheck(this)">
-          <div class="check-box"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <span class="check-text" style="font-size: 0.85rem; color: var(--charcoal-light);">面试前一晚过一遍这套材料</span>
-        </div>
+      <div class="rounded-xl p-5 bg-forest-pale/40 border border-forest/10">
+        <p class="text-xs text-forest font-semibold mb-2">更好的答法 · 从业者视角</p>
+        <p class="text-sm text-ink-sec leading-relaxed">"最大的挑战是在<span class="font-semibold text-ink">业务理想需求和真实市场之间找到平衡</span>。业务希望候选人越全面越好，但现实未必有完全匹配的人。所以既要理解岗位，也要理解市场，还要持续沟通推动，找到当前阶段真正合适的人。"</p>
+        <p class="text-xs text-forest mt-2 italic">这就是面试官后面一直在引导你的方向。</p>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- ==================== CARD 5: 为什么想做招聘 ==================== -->
-    <section class="bento-card" id="why-recruit" style="grid-column: span 2; padding: 32px;">
-      <div class="section-label">MOTIVATION</div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;">被问"为什么想做招聘"</h2>
-      <div class="quote-block">
-        <p><strong style="color: var(--coral-dark);">【结论】</strong>两个原因：第一是我发现自己真的擅长，第二是招聘是HR里最直接创造业务价值的环节。</p>
-        <p><strong style="color: var(--coral-dark);">【证据一】</strong>擅长这件事，是做岗位说明书项目时意识到的。我需要一小时理解一个完全不了解的岗位，拆解出核心职责和人才标准。做得越深入越觉得有意思——本质是"理解人"和"理解业务"的结合，应用心理学恰好给了我这两个视角的训练。</p>
-        <p><strong style="color: var(--coral-dark);">【证据二】</strong>选招聘而不是其他HR模块，是因为招聘的结果最可衡量。招到合适的人，业务团队会直接反馈；人才判断准，用人部门会信任你。我喜欢"做了就能看到效果"的工作节奏。做测评数据分析和一对一沟通转化时，也一直在验证这个判断。</p>
-        <p><strong style="color: var(--coral-dark);">【落回岗位】</strong>选招聘不是因为觉得它简单或门槛低，而是认真比较后觉得最匹配我的能力和兴趣。来找实习，就是想验证判断对不对。</p>
+  <!-- Q3: 岗位说明书 vs 人才画像 答法 -->
+  <div class="mb-10">
+    <div class="chat chat-start mb-4"><div class="chat-image avatar placeholder"><div class="bg-amber/20 text-amber-deep w-10 rounded-full"><span class="text-sm font-serif">面</span></div></div><div class="chat-bubble bg-amber-light text-ink border-0">岗位说明书和人才画像有什么区别？</div></div>
+    <div class="ml-14 bg-white rounded-xl border border-cream-deep p-5 shadow-sm relative">
+      <div class="flex items-center justify-between mb-2">
+        <p class="text-xs text-ink-muted tracking-wider">推荐答法</p>
+        <button class="btn btn-xs btn-ghost text-forest gap-1 hover:bg-forest-pale" onclick="copyText('qa3-answer')"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>复制</button>
       </div>
-    </section>
+      <p id="qa3-answer" class="text-sm text-ink-sec leading-relaxed">"我理解岗位说明书更像对岗位本身的系统描述，包括职责、任职资格、汇报关系等，是偏组织管理视角。人才画像则更偏招聘视角，它会基于岗位需求提炼当前阶段最关键的人才特征，帮助招聘更高效地判断候选人匹配度。岗位说明书更完整，人才画像更聚焦。"</p>
+    </div>
+  </div>
 
-    <!-- ==================== CARD 10: 心态校准 (medium) ==================== -->
-    <section class="bento-card" id="mindset" style="padding: 28px;">
-      <div class="section-label">MINDSET</div>
-      <h2 style="font-size: 1.2rem; font-weight: 800; margin-bottom: 20px;">心态校准</h2>
-      <div style="display: flex; flex-direction: column; gap: 16px;">
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 8px; height: 8px; background: var(--coral); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
-          <p style="font-size: 0.88rem; line-height: 1.7; color: var(--charcoal-light);">你的素材其实更深 —— 管理者访谈是真的，数据分析是真的，深度沟通是真的</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 8px; height: 8px; background: var(--gold); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
-          <p style="font-size: 0.88rem; line-height: 1.7; color: var(--charcoal-light);">目标不是"表现得像有经验的人"，是"表现得像有扎实基础、能快速上手的人"</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 8px; height: 8px; background: var(--sage); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
-          <p style="font-size: 0.88rem; line-height: 1.7; color: var(--charcoal-light);">面试官不是敌人，问挑战性问题是在看你怎么思考</p>
-        </div>
-        <div style="display: flex; gap: 12px; align-items: flex-start;">
-          <div style="width: 8px; height: 8px; background: var(--coral-light); border-radius: 50%; margin-top: 7px; flex-shrink: 0;"></div>
-          <p style="font-size: 0.88rem; line-height: 1.7; color: var(--charcoal-light);">准备到了就不用紧张，能控制的是准备程度</p>
-        </div>
-      </div>
-    </section>
+  <!-- Key Insight -->
+  <div class="bg-forest-pale/20 rounded-xl p-6 mb-10 border-l-4 border-forest">
+    <p class="text-sm text-ink-sec leading-relaxed"><span class="font-semibold text-forest">底层逻辑：</span>只有理解业务真正需要解决的问题，招聘才能判断哪些条件是必须的、哪些是可以培养的。否则会一直按理想标准筛人，但现实里真正适合的人反而被错过。</p>
+  </div>
 
-    <!-- ==================== CARD 6: 杀手锏故事 ==================== -->
-    <section class="bento-card" id="killer-story" style="grid-column: span 3; padding: 36px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 24px;">
-        <div class="section-label" style="margin-bottom: 0;">KILLER STORY</div>
-        <div class="tag" style="background: linear-gradient(135deg, rgba(232,120,90,0.15), rgba(212,168,85,0.15)); color: var(--coral-dark);">核心资产</div>
-      </div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 28px;">你的杀手锏 | 岗位体系建设项目</h2>
+  <!-- Growth Challenges -->
+  <div class="divider mb-6"></div>
+  <p class="text-ink-muted text-sm mb-6">最后，也需要正视招聘实操中的两个真实挑战——</p>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="card bg-white shadow-sm border border-cream-deep"><div class="card-body p-6">
+      <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-coral-light text-coral flex items-center justify-center font-serif font-bold">壹</div><h3 class="font-semibold text-ink">心态韧性</h3></div>
+      <p class="text-ink-sec text-sm leading-relaxed">候选人爽约、被竞品截胡——如何在高频挫败中迅速调整，不带情绪地找下一个目标。</p>
+    </div></div>
+    <div class="card bg-white shadow-sm border border-cream-deep"><div class="card-body p-6">
+      <div class="flex items-center gap-3 mb-3"><div class="w-10 h-10 rounded-full bg-forest-pale text-forest flex items-center justify-center font-serif font-bold">贰</div><h3 class="font-semibold text-ink">跨部门沟通灵活度</h3></div>
+      <p class="text-ink-sec text-sm leading-relaxed">面对业务部门的强势或不配合，如何巧妙影响他们，成为招聘的盟友。</p>
+    </div></div>
+  </div>
+</section>
 
-      <!-- Timeline -->
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; margin-bottom: 28px;">
-        <!-- Connecting line (hidden on small) -->
-        <svg style="position: absolute; top: 36px; left: calc(16.67% - 8px); right: calc(16.67% - 8px); width: calc(66.67% + 16px); height: 3px; z-index: 0;" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="timelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:#E8785A"/>
-              <stop offset="50%" style="stop-color:#D4A855"/>
-              <stop offset="100%" style="stop-color:#7BAE7F"/>
-            </linearGradient>
-          </defs>
-          <rect x="0" y="0" width="100%" height="3" rx="2" fill="url(#timelineGrad)"/>
-        </svg>
+<!-- ===== STRATEGIC REDIRECT ===== -->
+<section id="redirect" class="max-w-6xl mx-auto px-8 pb-20">
+  <div class="bg-cream-dark/50 rounded-2xl p-8 md:p-10">
+    <div class="flex items-end gap-5 mb-8">
+      <span class="text-5xl font-serif text-cream-deep leading-none select-none">→</span>
+      <div><h2 class="font-serif text-xl text-ink">战略重定向</h2><p class="text-ink-muted text-sm max-w-lg">停止海投基础招聘，把好钢用在刀刃上。</p></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div class="card bg-white/80 shadow-sm border border-cream-deep hover:border-forest/30 transition-all cursor-default"><div class="card-body p-5"><h3 class="card-title text-base font-semibold">人才发展 / 组织发展 (TD/OD)</h3><p class="text-[13px] text-ink-muted">盘活体系和数据分析能力在这里是绝对主力。</p></div></div>
+      <div class="card bg-white/80 shadow-sm border border-cream-deep hover:border-forest/30 transition-all cursor-default"><div class="card-body p-5"><h3 class="card-title text-base font-semibold">人才测评中心 / 培训岗</h3><p class="text-[13px] text-ink-muted">完美契合南方电网 AI 智能体培训经验。</p></div></div>
+      <div class="card bg-white/80 shadow-sm border border-cream-deep hover:border-forest/30 transition-all cursor-default"><div class="card-body p-5"><h3 class="card-title text-base font-semibold">人力资源数据分析师</h3><p class="text-[13px] text-ink-muted">5000 份数据的透视分析是最好的敲门砖。</p></div></div>
+      <div class="card bg-white/80 shadow-sm border border-cream-deep hover:border-forest/30 transition-all cursor-default"><div class="card-body p-5"><h3 class="card-title text-base font-semibold">HR 咨询公司顾问助理</h3><p class="text-[13px] text-ink-muted">你的"学院派严谨"在乙方恰好是"专业与靠谱"的代名词。</p></div></div>
+    </div>
+  </div>
+</section>
 
-        <!-- Phase 1 -->
-        <div style="position: relative; z-index: 1; text-align: center;">
-          <div style="width: 72px; height: 72px; background: linear-gradient(135deg, var(--coral), var(--coral-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(232,120,90,0.3);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px; color: var(--coral-dark);">阶段一</div>
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 12px;">需求理解</div>
-          <div style="background: rgba(232,120,90,0.06); border-radius: 12px; padding: 14px 16px; text-align: left;">
-            <div style="font-size: 0.72rem; color: var(--coral); font-weight: 700; margin-bottom: 6px;">= 招聘的"业务对齐"</div>
-            <div style="font-size: 0.82rem; color: var(--charcoal-light); line-height: 1.65;">
-              20+位中高层管理者访谈<br>
-              了解业务目标、团队现状、缺什么样的人<br>
-              <span style="font-weight: 600; color: var(--charcoal);">训练"快速理解业务"能力</span>
-            </div>
-          </div>
-        </div>
+<!-- ===== CLOSING ===== -->
+<section class="max-w-2xl mx-auto px-8 pb-28 text-center">
+  <div class="divider"></div>
+  <p class="font-serif text-xl md:text-2xl text-ink-sec leading-relaxed mt-6 mb-6">不要因为错过一辆大巴而难过，<br>因为你的票本来就该坐高铁。</p>
+  <p class="text-[15px] text-ink-muted leading-relaxed max-w-md mx-auto mb-8">带着这份复盘报告，调整简历的方向和叙事结构。用不了多久，你一定会遇到那个懂得欣赏你深度的团队。</p>
+  <p class="text-amber font-serif text-lg tracking-wide">The best is yet to come.</p>
+</section>
 
-        <!-- Phase 2 -->
-        <div style="position: relative; z-index: 1; text-align: center;">
-          <div style="width: 72px; height: 72px; background: linear-gradient(135deg, var(--gold), var(--gold-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(212,168,85,0.3);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          </div>
-          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px; color: #B8922E;">阶段二</div>
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 12px;">标准建立</div>
-          <div style="background: rgba(212,168,85,0.06); border-radius: 12px; padding: 14px 16px; text-align: left;">
-            <div style="font-size: 0.72rem; color: var(--gold); font-weight: 700; margin-bottom: 6px;">= 招聘的"人才画像"</div>
-            <div style="font-size: 0.82rem; color: var(--charcoal-light); line-height: 1.65;">
-              独立撰写130份岗位说明书<br>
-              岗位职责+能力要求+经验要求+性格特质<br>
-              <span style="font-weight: 600; color: var(--charcoal);">训练"拆解岗位需求"能力</span>
-            </div>
-          </div>
-        </div>
+<!-- Toast -->
+<div id="toast-copy" class="toast-copy"><div class="alert alert-success py-2 px-4 shadow-lg text-sm"><span>已复制到剪贴板</span></div></div>
 
-        <!-- Phase 3 -->
-        <div style="position: relative; z-index: 1; text-align: center;">
-          <div style="width: 72px; height: 72px; background: linear-gradient(135deg, var(--sage), var(--sage-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 4px 16px rgba(123,174,127,0.3);">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-          </div>
-          <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px; color: var(--sage-dark);">阶段三</div>
-          <div style="font-weight: 600; font-size: 0.88rem; margin-bottom: 12px;">数据验证</div>
-          <div style="background: rgba(123,174,127,0.06); border-radius: 12px; padding: 14px 16px; text-align: left;">
-            <div style="font-size: 0.72rem; color: var(--sage-dark); font-weight: 700; margin-bottom: 6px;">= 招聘的"人才评估"</div>
-            <div style="font-size: 0.82rem; color: var(--charcoal-light); line-height: 1.65;">
-              结合5000+测评数据和500份问卷数据<br>
-              验证岗位要求是否合理，有偏差就调整<br>
-              <span style="font-weight: 600; color: var(--charcoal);">训练"用数据辅助人才判断"能力</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="quote-block" style="background: linear-gradient(135deg, rgba(232,120,90,0.04), rgba(123,174,127,0.04), rgba(212,168,85,0.04));">
-        <p style="font-weight: 500;">这个项目的起点是"业务需要什么样的人"，终点是"用什么标准衡量人"。招聘也是这个逻辑——理解需求、定义画像、评估候选人。所以虽然不是招聘，但给招聘打下了直接可用的基础。</p>
-      </div>
-    </section>
-
-    <!-- ==================== CARD 8: 对标学习 ==================== -->
-    <section class="bento-card" id="learn-from" style="grid-column: span 2; padding: 32px;">
-      <div class="section-label">BENCHMARKING</div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 20px;">学他的，不学他的</h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <div class="learn-col" style="background: linear-gradient(135deg, rgba(123,174,127,0.08), rgba(123,174,127,0.02)); border: 1px solid rgba(123,174,127,0.15);">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#7BAE7F" stroke-width="2"/><path d="M6 10l3 3 5-6" stroke="#7BAE7F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span style="font-weight: 700; color: var(--sage-dark); font-size: 0.95rem;">要学的</span>
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">"闭环"叙事能力 <span style="color: var(--sage);">&rarr;</span> 你的项目也要"有头有尾"地讲</div>
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">用数据说话 <span style="color: var(--sage);">&rarr;</span> 主动说130、20+、80+、5000+</div>
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">主动提问 <span style="color: var(--sage);">&rarr;</span> 准备2-3个问面试官的问题</div>
-          </div>
-        </div>
-        <div class="learn-col" style="background: linear-gradient(135deg, rgba(232,120,90,0.06), rgba(232,120,90,0.02)); border: 1px solid rgba(232,120,90,0.12);">
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#E8785A" stroke-width="2"/><path d="M7 7l6 6M13 7l-6 6" stroke="#E8785A" stroke-width="2" stroke-linecap="round"/></svg>
-            <span style="font-weight: 700; color: var(--coral-dark); font-size: 0.95rem;">不学的</span>
-          </div>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">硬凑"招聘闭环" <span style="color: var(--coral);">&rarr;</span> 用"底层能力匹配"逻辑更稳</div>
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">拼"表达能力" <span style="color: var(--coral);">&rarr;</span> 你的优势是内容深度</div>
-            <div style="font-size: 0.88rem; color: var(--charcoal-light); line-height: 1.65;">模仿他的经历 <span style="color: var(--coral);">&rarr;</span> 你的素材在深度上更扎实</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== CARD 11: 追问应对清单 ==================== -->
-    <section class="bento-card" id="followups" style="grid-column: span 3; padding: 32px;">
-      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px;">
-        <div class="section-label" style="margin-bottom: 0;">FOLLOW-UPS</div>
-        <div class="tag" style="background: rgba(212,168,85,0.12); color: #B8922E;">8个高频追问</div>
-      </div>
-      <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 24px;">HR可能追问的8个问题</h2>
-      <div style="display: flex; flex-direction: column; gap: 10px;" id="accordionContainer">
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q1: 130份JD具体怎么写的？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">流程是"访谈-拆解-验证"三步。第一步管理者访谈，了解业务问题和对人的期望；第二步拆解职责和人才画像；第三步用测评数据验证要求设置是否合理。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q2: 20多次管理者访谈有遇到困难吗？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">遇到过。"很忙"的应对是提前发问题、控制时间；"需求和真实不一致"的应对是追问具体场景还原真实需求。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q3: 5000多份测评数据具体分析什么？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">分析测评结果和绩效的关联性，找到能预测岗位表现的能力指标，做高低绩效组差异分析。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q4: 小红书运营和招聘有什么关系？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">本质都是"找到目标人群&rarr;建立信任&rarr;促成转化"。触达3000+用户、沉淀240+高意向，就是候选人漏斗管理。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q5: 面试官培训工具是什么？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">输入岗位名称自动生成结构化面试问题清单，每个问题对应一项胜任力。帮助面试官做客观评估，减少主观偏差。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q6: 招聘最大的挑战是什么？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">"需求对齐"和"人才判断"的平衡。管理者说的和真实需求常有差距；简历只看到冰山一角，短时间内做准确判断很难。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q7: 英语六级在招聘中有什么用？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">能处理英文JD和简历，如果公司有海外方向招聘需求可以直接参与。</p>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <div class="accordion-header" onclick="toggleAccordion(this)">
-            <span style="font-weight: 600; font-size: 0.92rem; color: var(--charcoal);">Q8: 研二了时间能保证吗？</span>
-            <svg class="accordion-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 7l5 5 5-5" stroke="#E8785A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="accordion-content">
-            <p style="font-size: 0.88rem; line-height: 1.75; color: var(--charcoal-light); padding-top: 4px;">论文进度正常/已完成，每周保证X天到岗，能持续到X月。来实习不是随便找事做，是有明确学习目标的。</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </div><!-- end bento-grid -->
-
-  <!-- Footer -->
-  <footer style="text-align: center; padding: 48px 0 24px; color: var(--warm-gray); font-size: 0.8rem;">
-    <div style="width: 40px; height: 3px; background: var(--coral-light); border-radius: 2px; margin: 0 auto 16px;"></div>
-    准备充分，上场就有底气
-  </footer>
-
-</div><!-- end main-content -->
-
+<!-- ===== SCRIPTS ===== -->
 <script>
-  // ==========================================
-  // IntersectionObserver - scroll reveal
-  // ==========================================
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-      if (entry.isIntersecting) {
-        // Stagger animation based on card index
-        const cards = document.querySelectorAll('.bento-card');
-        const cardIndex = Array.from(cards).indexOf(entry.target);
-        const delay = (cardIndex % 3) * 120;
+(function(){
+  const svg=document.getElementById('radar-chart'),cx=200,cy=180,maxR=130;
+  const dims=[{label:'情绪稳定',score:95,color:'#2D6A4F'},{label:'数据洞察',score:85,color:'#2D6A4F'},{label:'知识体系',score:85,color:'#2D6A4F'},{label:'沟通表达',score:60,color:'#BC4749'},{label:'灰度思维',score:60,color:'#BC4749'}],n=dims.length;
+  function pt(i,r){const a=Math.PI*2*i/n-Math.PI/2;return{x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)}}
+  for(let lv=1;lv<=5;lv++){const r=maxR*lv/5;let p=[];for(let i=0;i<n;i++){const q=pt(i,r);p.push(`${q.x},${q.y}`)}const g=document.createElementNS('http://www.w3.org/2000/svg','polygon');g.setAttribute('points',p.join(' '));g.setAttribute('fill','none');g.setAttribute('stroke','#E8E0D6');g.setAttribute('stroke-width',lv===5?'1.5':'0.7');svg.appendChild(g)}
+  for(let i=0;i<n;i++){const p=pt(i,maxR);const l=document.createElementNS('http://www.w3.org/2000/svg','line');l.setAttribute('x1',cx);l.setAttribute('y1',cy);l.setAttribute('x2',p.x);l.setAttribute('y2',p.y);l.setAttribute('stroke','#E8E0D6');l.setAttribute('stroke-width','0.7');svg.appendChild(l)}
+  let dp=[];for(let i=0;i<n;i++){const r=maxR*dims[i].score/100;const p=pt(i,r);dp.push(`${p.x},${p.y}`)}const d=document.createElementNS('http://www.w3.org/2000/svg','polygon');d.setAttribute('points',dp.join(' '));d.setAttribute('fill','rgba(45,106,79,0.12)');d.setAttribute('stroke','#2D6A4F');d.setAttribute('stroke-width','2.5');svg.appendChild(d);
+  for(let i=0;i<n;i++){const r=maxR*dims[i].score/100;const p=pt(i,r);const c=document.createElementNS('http://www.w3.org/2000/svg','circle');c.setAttribute('cx',p.x);c.setAttribute('cy',p.y);c.setAttribute('r','4.5');c.setAttribute('fill',dims[i].color);svg.appendChild(c);const lp=pt(i,maxR+30);const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',lp.x);t.setAttribute('y',lp.y);t.style.fill=dims[i].color;t.style.fontWeight='600';t.style.fontSize='13px';t.style.textAnchor='middle';t.textContent=dims[i].label+' '+dims[i].score;svg.appendChild(t)}
+})();
 
-        setTimeout(() => {
-          entry.target.classList.add('visible');
-        }, delay);
-      }
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -40px 0px'
-  });
+function copyText(id){const el=document.getElementById(id);navigator.clipboard.writeText(el.innerText).then(()=>{const t=document.getElementById('toast-copy');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)})}
 
-  document.querySelectorAll('.bento-card').forEach(card => observer.observe(card));
-
-  // ==========================================
-  // Progress bar
-  // ==========================================
-  const progressBar = document.getElementById('progressBar');
-  window.addEventListener('scroll', () => {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = (scrollTop / docHeight) * 100;
-    progressBar.style.width = scrollPercent + '%';
-  });
-
-  // ==========================================
-  // Active nav link
-  // ==========================================
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = [];
-
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && href.startsWith('#')) {
-      const section = document.querySelector(href);
-      if (section) sections.push({ el: section, link: link });
-    }
-  });
-
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(l => l.classList.remove('active'));
-        const match = sections.find(s => s.el === entry.target);
-        if (match) match.link.classList.add('active');
-      }
-    });
-  }, {
-    threshold: 0.3,
-    rootMargin: '-100px 0px -50% 0px'
-  });
-
-  sections.forEach(s => navObserver.observe(s.el));
-
-  // ==========================================
-  // Accordion
-  // ==========================================
-  function toggleAccordion(header) {
-    const content = header.nextElementSibling;
-    const arrow = header.querySelector('.accordion-arrow');
-    const isOpen = content.classList.contains('open');
-
-    // Close all
-    document.querySelectorAll('.accordion-content').forEach(c => c.classList.remove('open'));
-    document.querySelectorAll('.accordion-arrow').forEach(a => a.classList.remove('open'));
-
-    // Open clicked if was closed
-    if (!isOpen) {
-      content.classList.add('open');
-      arrow.classList.add('open');
-    }
-  }
-
-  // ==========================================
-  // Checklist
-  // ==========================================
-  function toggleCheck(item) {
-    item.classList.toggle('checked');
-    // Save state
-    const items = document.querySelectorAll('.check-item');
-    const states = Array.from(items).map(i => i.classList.contains('checked'));
-    localStorage.setItem('interview-checklist', JSON.stringify(states));
-  }
-
-  // Restore checklist state
-  (function() {
-    const saved = localStorage.getItem('interview-checklist');
-    if (saved) {
-      try {
-        const states = JSON.parse(saved);
-        const items = document.querySelectorAll('.check-item');
-        states.forEach((checked, i) => {
-          if (checked && items[i]) items[i].classList.add('checked');
-        });
-      } catch(e) {}
-    }
-  })();
+const sections=document.querySelectorAll('section[id]'),navLinks=document.querySelectorAll('nav a[href^="#"]');
+window.addEventListener('scroll',()=>{let cur='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});navLinks.forEach(a=>{a.classList.remove('text-forest','bg-forest-ghost','font-medium');if(a.getAttribute('href')==='#'+cur)a.classList.add('text-forest','bg-forest-ghost','font-medium')})});
 </script>
-
 </body>
 </html>
